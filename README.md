@@ -283,7 +283,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## 16. Author
 
 **System Architect**  
-*   Email: architect@example.com  
+*   Email: aliawan8694@gmail.com  
 *   GitHub: [github.com/ML-Projects](https://github.com/ML-Projects)  
 
 ---
