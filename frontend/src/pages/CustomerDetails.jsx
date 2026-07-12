@@ -62,7 +62,7 @@ const CustomerDetails = () => {
 
   // Helper to extract avatar initials
   const getAvatarInitials = (segment) => {
-    if (!segment) return 'JD';
+    if (!segment) return 'MA';
     const words = segment.split(' ');
     if (words.length >= 2) {
       return `${words[0][0]}${words[1][0]}`.toUpperCase();
@@ -154,7 +154,7 @@ const CustomerDetails = () => {
 
   const behaviors = data ? getBehaviors(data.segment) : [];
   const recommendations = data ? getRecommendations(data.segment) : [];
-  const avatar = data ? getAvatarInitials(data.segment) : 'JD';
+  const avatar = data ? getAvatarInitials(data.segment) : 'MA';
 
   return (
     <div className="customer-details-page">

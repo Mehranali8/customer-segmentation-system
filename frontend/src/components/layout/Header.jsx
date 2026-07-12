@@ -75,14 +75,14 @@ const Header = () => {
           <h1 className="page-title">{pageTitle}</h1>
         </div>
       </div>
-      
+
       <div className="header-right">
         {/* Search Bar Placeholder (UI Only) */}
         <div className="search-bar">
           <SearchIcon />
-          <input 
-            type="text" 
-            placeholder="Search customers, segments..." 
+          <input
+            type="text"
+            placeholder="Search customers, segments..."
             className="search-input"
             disabled
           />
@@ -95,9 +95,9 @@ const Header = () => {
         </button>
 
         {/* Theme Toggle Button */}
-        <button 
-          type="button" 
-          className="theme-toggle-btn" 
+        <button
+          type="button"
+          className="theme-toggle-btn"
           onClick={toggleTheme}
           aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
         >
@@ -106,8 +106,8 @@ const Header = () => {
 
         {/* User Profile Info & Avatar (UI Only) */}
         <div className="user-profile-header">
-          <div className="avatar-header">JD</div>
-          <span className="user-name-header">John Doe</span>
+          <div className="avatar-header">MA</div>
+          <span className="user-name-header">Mehran Ali</span>
         </div>
       </div>
     </header>

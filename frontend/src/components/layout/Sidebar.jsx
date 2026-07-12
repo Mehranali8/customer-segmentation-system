@@ -67,7 +67,7 @@ const Sidebar = () => {
           <span className="logo-text">CustSeg CLI</span>
         </div>
       </div>
-      
+
       <nav className="sidebar-nav">
         <ul className="nav-list">
           {menuItems.map((item) => (
@@ -86,9 +86,9 @@ const Sidebar = () => {
 
       <div className="sidebar-footer">
         <div className="user-profile">
-          <div className="avatar">JD</div>
+          <div className="avatar">MA</div>
           <div className="user-info">
-            <span className="user-name">John Doe</span>
+            <span className="user-name">Mehran Ali</span>
             <span className="user-role">Architect</span>
           </div>
         </div>
