@@ -116,19 +116,19 @@ customer-segmentation/
 Below are placeholders for the UI views:
 
 #### Light Mode Dashboard
-![Light Mode Dashboard](/screenshots/dashboard_light.png)
+![Light Mode Dashboard](./screenshots/Light%20Mode%20Dashboard.PNG)
 
 #### Dark Mode Dashboard
-![Dark Mode Dashboard](/screenshots/dashboard_dark.png)
+![Dark Mode Dashboard](./screenshots/Dark%20Mode%20Dashboard.PNG)
 
 #### Prediction Panel
-![Prediction Panel](/screenshots/prediction.png)
+![Prediction Panel](./screenshots/Prediction%20Panel.PNG)
 
 #### Customer Lookup Profile
-![Customer Lookup Profile](/screenshots/search.png)
+![Customer Lookup Profile](./screenshots/Customer%20Lookup%20Profile.PNG)
 
 #### Detailed Customer Profile
-![Detailed Customer Profile](/screenshots/details.png)
+![Detailed Customer Profile](./screenshots/Detailed%20Customer%20Profile.PNG)
 
 ---
 
