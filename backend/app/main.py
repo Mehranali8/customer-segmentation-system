@@ -16,6 +16,8 @@ from app.dashboard import get_dashboard_stats
 from app.customer_search import get_customer_details
 from app.customer_details import get_detailed_customer_profile
 
+print("========== MAIN.PY LOADED ==========")
+
 app = FastAPI(
     title="Customer Segmentation API",
     description="Machine Learning Customer Segmentation Backend",
@@ -40,6 +42,7 @@ scaler = StandardScaler()
 
 @app.on_event("startup")
 def startup_event():
+    print("========== CORS CONFIG ACTIVE ==========")
     """
     Startup event handler that loads the trained K-Means model
     and fits the standard scaler using raw RFM reference features.
