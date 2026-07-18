@@ -6,6 +6,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import CustomerSearch from './pages/CustomerSearch';
 import Prediction from './pages/Prediction';
 import CustomerDetails from './pages/CustomerDetails';
+import Analytics from './pages/Analytics';
 import './App.css';
 
 /**
@@ -29,6 +30,9 @@ function App() {
 
           {/* Customer Details Page */}
           <Route path="/customer-details" element={<CustomerDetails />} />
+
+          {/* Analytics Page */}
+          <Route path="/analytics" element={<Analytics />} />
 
           {/* Fallback Catch-All Route */}
           <Route path="*" element={

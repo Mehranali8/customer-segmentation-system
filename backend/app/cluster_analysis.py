@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+from typing import Dict, Any
 
 def analyze_clusters():
     # Resolve absolute paths
@@ -84,6 +85,72 @@ def analyze_clusters():
     print(f"  - Cluster 0 covers the primary active base ({int(summary.loc[0, 'Count'])} customers) with moderate spending.")
     print(f"  - Cluster 1 contains slipping/at-risk customers ({int(summary.loc[1, 'Count'])} customers) with very high recency.")
     print("=" * 70)
+
+def get_cluster_analytics() -> Dict[str, Any]:
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    labeled_path = os.path.join(base_dir, "datasets", "customer_segments_labeled.csv")
+    rfm_path = os.path.join(base_dir, "datasets", "customer_rfm.csv")
+    
+    if not os.path.exists(labeled_path):
+        raise FileNotFoundError(f"Labeled segments dataset not found at: {labeled_path}")
+    if not os.path.exists(rfm_path):
+        raise FileNotFoundError(f"Reference RFM dataset not found at: {rfm_path}")
+        
+    labeled_df = pd.read_csv(labeled_path)
+    rfm_df = pd.read_csv(rfm_path)
+    
+    # Merge on CustomerID to get unscaled Recency, Frequency, Monetary values
+    merged_df = pd.merge(rfm_df, labeled_df[["CustomerID", "Cluster", "CustomerSegment"]], on="CustomerID")
+    
+    total_customers = len(merged_df)
+    
+    # Group by Cluster and CustomerSegment and calculate true RFM means, count
+    summary = merged_df.groupby(["Cluster", "CustomerSegment"]).agg({
+        "Recency": "mean",
+        "Frequency": "mean",
+        "Monetary": "mean",
+        "CustomerID": "count"
+    }).reset_index()
+    
+    summary["Percentage"] = (summary["CustomerID"] / total_customers) * 100
+    
+    # Convert summary dataframe to dictionary list
+    cluster_metrics = []
+    for _, row in summary.iterrows():
+        cluster_metrics.append({
+            "cluster_id": int(row["Cluster"]),
+            "segment_name": str(row["CustomerSegment"]),
+            "avg_recency": round(float(row["Recency"]), 2),
+            "avg_frequency": round(float(row["Frequency"]), 2),
+            "avg_monetary": round(float(row["Monetary"]), 2),
+            "count": int(row["CustomerID"]),
+            "percentage": round(float(row["Percentage"]), 2)
+        })
+        
+    # Sort cluster metrics by cluster_id
+    cluster_metrics = sorted(cluster_metrics, key=lambda x: x["cluster_id"])
+    
+    # Calculate index pointers for insights
+    summary_indexed = summary.set_index("Cluster")
+    max_monetary_cluster = int(summary_indexed["Monetary"].idxmax())
+    max_frequency_cluster = int(summary_indexed["Frequency"].idxmax())
+    least_active_cluster = int(summary_indexed["Recency"].idxmax())
+    most_recent_cluster = int(summary_indexed["Recency"].idxmin())
+    
+    # Locate row dictionaries for observations
+    find_metrics = lambda cid: next(item for item in cluster_metrics if item["cluster_id"] == cid)
+    
+    insights = {
+        "highest_spending": find_metrics(max_monetary_cluster),
+        "most_frequent": find_metrics(max_frequency_cluster),
+        "least_active": find_metrics(least_active_cluster),
+        "most_recent": find_metrics(most_recent_cluster)
+    }
+    
+    return {
+        "cluster_metrics": cluster_metrics,
+        "insights": insights
+    }
 
 if __name__ == "__main__":
     analyze_clusters()
